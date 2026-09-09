@@ -20,7 +20,7 @@ export const RegistrationPage = () => {
     occupation: 'UPSC Civil Services',
     preferredPlan: searchParams.get('plan') || 'premium',
     preferredShift: 'full',
-    preferredSeat: searchParams.get('seat') || 'A-12',
+    preferredSeat: searchParams.get('seat') || 'Desk 04',
     joiningDate: new Date().toISOString().split('T')[0],
     notes: '',
   });

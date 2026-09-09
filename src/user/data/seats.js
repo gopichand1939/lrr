@@ -1,54 +1,58 @@
-// Generate 36 static seats with detailed properties for visual floor map
+// Generate 36 static seats numbered 1 to 36 for visual floor map
 
 const generateSeats = () => {
   const seats = [];
-  const zones = [
-    { prefix: 'A', hall: 'Main Central AC Hall', count: 15, type: 'Standard' },
-    { prefix: 'B', hall: 'Silent Focus Hall', count: 12, type: 'Focus' },
-    { prefix: 'P', hall: 'Premium Solo Cabins', count: 9, type: 'Premium' },
-  ];
 
-  // Specific 8 available seats for static preview match
-  const availableSeatCodes = new Set([
-    'A-04', 'A-11', 'A-15',
-    'B-03', 'B-08', 'B-12',
-    'P-02', 'P-07'
-  ]);
+  // Available seats (8 total)
+  const availableSeatNumbers = new Set([4, 11, 15, 19, 24, 27, 30, 35]);
 
-  // Reserved seats
-  const reservedSeatCodes = new Set([
-    'A-07', 'B-05', 'P-04'
-  ]);
+  // Reserved seats (3 total)
+  const reservedSeatNumbers = new Set([7, 21, 32]);
 
-  zones.forEach(zone => {
-    for (let i = 1; i <= zone.count; i++) {
-      const num = i < 10 ? `0${i}` : `${i}`;
-      const code = `${zone.prefix}-${num}`;
-      
-      let status = 'occupied';
-      if (availableSeatCodes.has(code)) {
-        status = 'available';
-      } else if (reservedSeatCodes.has(code)) {
-        status = 'reserved';
-      }
+  for (let i = 1; i <= 36; i++) {
+    const numStr = i < 10 ? `0${i}` : `${i}`;
+    
+    let hall = 'Main Central AC Hall';
+    let zoneKey = 'A';
+    let type = 'Standard';
+    let price = '₹1,500 / mo';
 
-      seats.push({
-        id: code,
-        code: code,
-        zone: zone.hall,
-        zoneKey: zone.prefix,
-        type: zone.type,
-        status: status, // 'available' | 'occupied' | 'reserved'
-        features: [
-          'Personal LED Desk Light',
-          'Laptop Charging Socket',
-          zone.type === 'Premium' ? 'Lockable Cabinet & Cushion Chair' : 'High Privacy Wooden Partition',
-          'Ergonomic Swivel Chair'
-        ],
-        price: zone.type === 'Premium' ? '₹2,000 / mo' : '₹1,500 / mo'
-      });
+    if (i >= 16 && i <= 27) {
+      hall = 'Silent Focus Hall';
+      zoneKey = 'B';
+      type = 'Focus';
+      price = '₹1,500 / mo';
+    } else if (i >= 28) {
+      hall = 'Premium Solo Cabins';
+      zoneKey = 'P';
+      type = 'Premium';
+      price = '₹2,000 / mo';
     }
-  });
+
+    let status = 'occupied';
+    if (availableSeatNumbers.has(i)) {
+      status = 'available';
+    } else if (reservedSeatNumbers.has(i)) {
+      status = 'reserved';
+    }
+
+    seats.push({
+      id: `SEAT-${numStr}`,
+      code: `Desk ${numStr}`,
+      seatNumber: i,
+      zone: hall,
+      zoneKey: zoneKey,
+      type: type,
+      status: status, // 'available' | 'occupied' | 'reserved'
+      features: [
+        'Personal LED Desk Light',
+        'Laptop Charging Socket',
+        type === 'Premium' ? 'Lockable Cabinet & Cushion Chair' : 'High Privacy Wooden Partition',
+        'Ergonomic Swivel Chair'
+      ],
+      price: price
+    });
+  }
 
   return seats;
 };
@@ -61,9 +65,9 @@ export const seatStats = {
   available: 8,
   reserved: 3,
   zones: [
-    { key: 'ALL', name: 'All Desks (36)' },
-    { key: 'A', name: 'Main Central AC Hall (15)' },
-    { key: 'B', name: 'Silent Focus Hall (12)' },
-    { key: 'P', name: 'Premium Solo Cabins (9)' },
+    { key: 'ALL', name: 'All Desks (1–36)' },
+    { key: 'A', name: 'Main Central AC Hall (Desks 01–15)' },
+    { key: 'B', name: 'Silent Focus Hall (Desks 16–27)' },
+    { key: 'P', name: 'Premium Solo Cabins (Desks 28–36)' },
   ]
 };

@@ -32,15 +32,15 @@ export const SeatsPage = () => {
   };
 
   return (
-    <div className="py-12 sm:py-16 bg-slate-50 min-h-screen">
+    <div className="py-12 sm:py-16 bg-slate-950 text-white min-h-screen relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Back Navigation & Header */}
         <div className="mb-8 flex items-center justify-between">
-          <Button to="/" variant="ghost" size="sm" icon={ArrowLeft}>
+          <Button to="/" variant="ghost" size="sm" icon={ArrowLeft} className="text-slate-300 hover:text-white">
             Back to Home
           </Button>
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
             Visakhapatnam Reading Room Floor Map
           </span>
         </div>
@@ -49,6 +49,7 @@ export const SeatsPage = () => {
           badge="SEAT MANAGEMENT PREVIEW"
           title="Complete Reading Room Seat Availability Grid"
           subtitle="Explore all 36 dedicated desks across Central AC Hall, Silent Focus Hall, and Premium Cabins at Loukya's Reading Room."
+          dark={true}
         />
 
         {/* Top Summary Bar */}
@@ -59,7 +60,7 @@ export const SeatsPage = () => {
               <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mt-1">Total Desks</span>
             </div>
             <div>
-              <span className="text-3xl sm:text-4xl font-extrabold text-slate-300 block">{seatStats.occupied}</span>
+              <span className="text-3xl sm:text-4xl font-extrabold text-indigo-300 block">{seatStats.occupied}</span>
               <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mt-1">Occupied</span>
             </div>
             <div>
@@ -74,7 +75,7 @@ export const SeatsPage = () => {
         </div>
 
         {/* Filter Controls Bar */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 mb-8 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 mb-8 p-6 bg-slate-900/90 rounded-2xl border border-slate-800 shadow-sm backdrop-blur-md">
           {/* Zone Selector */}
           <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-400 mr-2">Zones:</span>
@@ -84,8 +85,8 @@ export const SeatsPage = () => {
                 onClick={() => setActiveZone(zone.key)}
                 className={`px-3.5 py-2 text-xs font-bold rounded-xl transition-all ${
                   activeZone === zone.key
-                    ? 'bg-brand-600 text-white shadow-sm'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    ? 'bg-orange-500 text-white shadow-glow-orange font-black'
+                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700/60'
                 }`}
               >
                 {zone.name}
@@ -98,24 +99,24 @@ export const SeatsPage = () => {
             <span className="text-xs font-bold uppercase tracking-wider text-slate-400 mr-2">Status:</span>
             <button
               onClick={() => setStatusFilter('all')}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${
-                statusFilter === 'all' ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-600 border-slate-200'
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg border transition-all ${
+                statusFilter === 'all' ? 'bg-slate-800 text-white border-slate-700' : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-slate-200'
               }`}
             >
               All Desks
             </button>
             <button
               onClick={() => setStatusFilter('available')}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${
-                statusFilter === 'available' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg border transition-all ${
+                statusFilter === 'available' ? 'bg-emerald-950 text-emerald-300 border-emerald-500/60' : 'bg-slate-950 text-emerald-500/70 border-slate-800 hover:border-emerald-800'
               }`}
             >
               Available ({seatStats.available})
             </button>
             <button
               onClick={() => setStatusFilter('occupied')}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg border ${
-                statusFilter === 'occupied' ? 'bg-slate-700 text-white border-slate-700' : 'bg-slate-100 text-slate-600 border-slate-200'
+              className={`px-3 py-1.5 text-xs font-bold rounded-lg border transition-all ${
+                statusFilter === 'occupied' ? 'bg-indigo-950 text-indigo-300 border-indigo-700/60' : 'bg-slate-950 text-indigo-400/70 border-slate-800 hover:border-indigo-800'
               }`}
             >
               Occupied ({seatStats.occupied})

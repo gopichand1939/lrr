@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { BookOpen, Menu, X, ArrowUpRight, Phone, Clock, MapPin } from 'lucide-react';
 import { readingRoomData } from '../../data/siteData';
 
@@ -7,6 +7,7 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,13 +31,27 @@ export const Navbar = () => {
     { name: 'Contact', path: '/#contact' },
   ];
 
-  const handleNavClick = (path) => {
+  const handleNavClick = (e, path) => {
     setMobileMenuOpen(false);
     if (path.includes('#')) {
       const elementId = path.split('#')[1];
-      const elem = document.getElementById(elementId);
-      if (elem) {
-        elem.scrollIntoView({ behavior: 'smooth' });
+      if (location.pathname === '/') {
+        e.preventDefault();
+        const elem = document.getElementById(elementId);
+        if (elem) {
+          elem.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        e.preventDefault();
+        navigate(`/#${elementId}`);
+      }
+    } else if (path === '/') {
+      if (location.pathname === '/') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        e.preventDefault();
+        navigate('/');
       }
     }
   };
@@ -81,12 +96,7 @@ export const Navbar = () => {
               <a
                 key={link.name}
                 href={link.path}
-                onClick={(e) => {
-                  if (link.path.startsWith('/#')) {
-                    e.preventDefault();
-                    handleNavClick(link.path);
-                  }
-                }}
+                onClick={(e) => handleNavClick(e, link.path)}
                 className={`px-3.5 py-1.5 text-xs xl:text-sm font-extrabold tracking-wide transition-all rounded-lg whitespace-nowrap ${
                   location.pathname === link.path || (location.pathname === '/' && link.path === '/')
                     ? 'text-orange-400 bg-orange-500/20 border border-orange-500/40 shadow-xs'
@@ -162,14 +172,7 @@ export const Navbar = () => {
                   <a
                     key={link.name}
                     href={link.path}
-                    onClick={(e) => {
-                      if (link.path.startsWith('/#')) {
-                        e.preventDefault();
-                        handleNavClick(link.path);
-                      } else {
-                        setMobileMenuOpen(false);
-                      }
-                    }}
+                    onClick={(e) => handleNavClick(e, link.path)}
                     className="px-4 py-3 text-base font-extrabold text-slate-200 hover:text-orange-400 hover:bg-white/5 rounded-xl transition-colors"
                   >
                     {link.name}

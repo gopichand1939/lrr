@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { HeroSection } from '../sections/Hero/HeroSection';
 import { AboutSection } from '../sections/About/AboutSection';
 import { FacilitiesSection } from '../sections/Facilities/FacilitiesSection';
@@ -11,9 +12,21 @@ import { CTASection } from '../sections/CTA/CTASection';
 import { ContactSection } from '../sections/Contact/ContactSection';
 
 export const HomePage = () => {
+  const location = useLocation();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    if (location.hash) {
+      const elementId = location.hash.replace('#', '');
+      setTimeout(() => {
+        const elem = document.getElementById(elementId);
+        if (elem) {
+          elem.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
 
   return (
     <div className="space-y-0">
