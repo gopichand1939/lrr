@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: light;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-amber-50/40 text-slate-900 antialiased overflow-x-hidden;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #fffbebf0;
+}
+::-webkit-scrollbar-thumb {
+  background: #fcd34d;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f97316;
+}
+
+/* Gradient Classes */
+.orange-gradient-btn {
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #c2410c 100%);
+}
+
+.orange-gradient-btn:hover {
+  background: linear-gradient(135deg, #ff8c38 0%, #f97316 50%, #ea580c 100%);
+}
+
+.warm-hero-bg {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 40%, #ffedd5 80%, #fef3c7 100%);
+}
+
+.orange-banner-gradient {
+  background: linear-gradient(135deg, #ea580c 0%, #c2410c 50%, #9a3412 100%);
+}
+
+/* Glassmorphism helpers */
+.glass-nav-warm {
+  background: rgba(255, 251, 235, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(253, 230, 138, 0.6);
+}
+
+.warm-card {
+  background: #ffffff;
+  border: 1px solid rgba(253, 230, 138, 0.8);
+  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.07);
+}
+
+.warm-card:hover {
+  border-color: rgba(249, 115, 22, 0.4);
+  box-shadow: 0 15px 35px -5px rgba(249, 115, 22, 0.15);
+}
+
+/* Text Orange Gradient */
+.text-gradient-orange {
+  background: linear-gradient(135deg, #ea580c 0%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
