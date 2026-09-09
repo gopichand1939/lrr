@@ -48,26 +48,26 @@ export const SeatsPage = () => {
         <SectionHeading
           badge="SEAT MANAGEMENT PREVIEW"
           title="Complete Reading Room Seat Availability Grid"
-          subtitle="Explore all 120 dedicated desks across Hall A, Hall B, Hall C, and Premium Cabins at Loukya's Reading Room."
+          subtitle="Explore all 36 dedicated desks across Central AC Hall, Silent Focus Hall, and Premium Cabins at Loukya's Reading Room."
         />
 
         {/* Top Summary Bar */}
         <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 mb-10 shadow-xl border border-slate-800">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-slate-800">
             <div>
-              <span className="text-3xl sm:text-4xl font-extrabold text-white block">120</span>
+              <span className="text-3xl sm:text-4xl font-extrabold text-white block">{seatStats.total}</span>
               <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mt-1">Total Desks</span>
             </div>
             <div>
-              <span className="text-3xl sm:text-4xl font-extrabold text-slate-300 block">102</span>
+              <span className="text-3xl sm:text-4xl font-extrabold text-slate-300 block">{seatStats.occupied}</span>
               <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mt-1">Occupied</span>
             </div>
             <div>
-              <span className="text-3xl sm:text-4xl font-extrabold text-emerald-400 block">18</span>
+              <span className="text-3xl sm:text-4xl font-extrabold text-emerald-400 block">{seatStats.available}</span>
               <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider block mt-1">Available Now</span>
             </div>
             <div>
-              <span className="text-3xl sm:text-4xl font-extrabold text-amber-400 block">5</span>
+              <span className="text-3xl sm:text-4xl font-extrabold text-amber-400 block">{seatStats.reserved}</span>
               <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider block mt-1">Reserved</span>
             </div>
           </div>
@@ -110,7 +110,7 @@ export const SeatsPage = () => {
                 statusFilter === 'available' ? 'bg-emerald-600 text-white border-emerald-600' : 'bg-emerald-50 text-emerald-700 border-emerald-200'
               }`}
             >
-              Available (18)
+              Available ({seatStats.available})
             </button>
             <button
               onClick={() => setStatusFilter('occupied')}
@@ -118,7 +118,7 @@ export const SeatsPage = () => {
                 statusFilter === 'occupied' ? 'bg-slate-700 text-white border-slate-700' : 'bg-slate-100 text-slate-600 border-slate-200'
               }`}
             >
-              Occupied (102)
+              Occupied ({seatStats.occupied})
             </button>
           </div>
         </div>

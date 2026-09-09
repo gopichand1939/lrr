@@ -12,10 +12,10 @@ export const readingRoomData = {
   instagramUrl: "https://www.instagram.com/loukyas_reading_room/?hl=en",
   
   stats: {
-    totalSeats: 120,
-    occupiedSeats: 102,
-    availableSeats: 18,
-    occupancyRate: "85%",
+    totalSeats: 36,
+    occupiedSeats: 28,
+    availableSeats: 8,
+    occupancyRate: "78%",
     satisfiedCandidates: "1,200+",
     operatingSince: "2021"
   },

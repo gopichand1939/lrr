@@ -13,7 +13,7 @@ export const SeatAvailabilitySection = () => {
   const navigate = useNavigate();
 
   const filteredSeats = activeZone === 'ALL' 
-    ? seatsData.slice(0, 30)
+    ? seatsData
     : seatsData.filter(s => s.zoneKey === activeZone);
 
   const handleSeatClick = (seat) => {
@@ -43,19 +43,19 @@ export const SeatAvailabilitySection = () => {
         <div className="bg-slate-900 text-white rounded-3xl p-6 sm:p-8 mb-10 shadow-2xl border border-slate-800">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center divide-x divide-slate-800">
             <div>
-              <span className="text-3xl sm:text-4xl font-extrabold text-white block font-display">120</span>
+              <span className="text-3xl sm:text-4xl font-extrabold text-white block font-display">{seatStats.total}</span>
               <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mt-1">Total Capacity</span>
             </div>
             <div>
-              <span className="text-3xl sm:text-4xl font-extrabold text-slate-300 block font-display">102</span>
+              <span className="text-3xl sm:text-4xl font-extrabold text-slate-300 block font-display">{seatStats.occupied}</span>
               <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mt-1">Occupied</span>
             </div>
             <div>
-              <span className="text-3xl sm:text-4xl font-extrabold text-emerald-400 block font-display">18</span>
+              <span className="text-3xl sm:text-4xl font-extrabold text-emerald-400 block font-display">{seatStats.available}</span>
               <span className="text-xs font-semibold text-emerald-400 uppercase tracking-wider block mt-1">Available Now</span>
             </div>
             <div>
-              <span className="text-3xl sm:text-4xl font-extrabold text-amber-400 block font-display">5</span>
+              <span className="text-3xl sm:text-4xl font-extrabold text-amber-400 block font-display">{seatStats.reserved}</span>
               <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider block mt-1">Reserved</span>
             </div>
           </div>
@@ -107,10 +107,10 @@ export const SeatAvailabilitySection = () => {
         {/* View Full Interactive Seat Layout CTA */}
         <div className="text-center bg-slate-900/80 p-6 rounded-2xl border border-slate-800 max-w-xl mx-auto">
           <p className="text-xs text-slate-400 font-medium mb-3">
-            Showing partial layout preview. View all 120 seats across Hall A, Hall B, Hall C & Cabins.
+            Showing visual floor plan preview for all {seatStats.total} desks across Central AC Hall, Silent Focus Hall & Premium Cabins.
           </p>
           <Button to="/seats" variant="cyan" size="md" icon={ArrowUpRight} iconPosition="right">
-            View All 120 Seats & Floor Layout
+            View All {seatStats.total} Seats & Floor Layout
           </Button>
         </div>
 

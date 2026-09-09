@@ -1,25 +1,23 @@
-// Generate 120 static mock seats with detailed properties for visual floor map
+// Generate 36 static seats with detailed properties for visual floor map
 
 const generateSeats = () => {
   const seats = [];
   const zones = [
-    { prefix: 'A', hall: 'Hall A - Standard AC', count: 35, type: 'Standard' },
-    { prefix: 'B', hall: 'Hall B - Silent Focus Zone', count: 40, type: 'Focus' },
-    { prefix: 'C', hall: 'Hall C - Express Shift Hall', count: 25, type: 'Express' },
-    { prefix: 'P', hall: 'Premium Cabins', count: 20, type: 'Premium' },
+    { prefix: 'A', hall: 'Main Central AC Hall', count: 15, type: 'Standard' },
+    { prefix: 'B', hall: 'Silent Focus Hall', count: 12, type: 'Focus' },
+    { prefix: 'P', hall: 'Premium Solo Cabins', count: 9, type: 'Premium' },
   ];
 
-  // Specific 18 available seats for static preview match
+  // Specific 8 available seats for static preview match
   const availableSeatCodes = new Set([
-    'A-04', 'A-12', 'A-18', 'A-27',
-    'B-05', 'B-14', 'B-22', 'B-31', 'B-38',
-    'C-02', 'C-09', 'C-15', 'C-21',
-    'P-03', 'P-07', 'P-12', 'P-16', 'P-19'
+    'A-04', 'A-11', 'A-15',
+    'B-03', 'B-08', 'B-12',
+    'P-02', 'P-07'
   ]);
 
   // Reserved seats
   const reservedSeatCodes = new Set([
-    'A-09', 'B-10', 'B-29', 'C-08', 'P-05'
+    'A-07', 'B-05', 'P-04'
   ]);
 
   zones.forEach(zone => {
@@ -42,9 +40,9 @@ const generateSeats = () => {
         type: zone.type,
         status: status, // 'available' | 'occupied' | 'reserved'
         features: [
-          'Personal LED Light',
-          'Charging Socket',
-          zone.type === 'Premium' ? 'Lockable Cabinet' : 'High Partition',
+          'Personal LED Desk Light',
+          'Laptop Charging Socket',
+          zone.type === 'Premium' ? 'Lockable Cabinet & Cushion Chair' : 'High Privacy Wooden Partition',
           'Ergonomic Swivel Chair'
         ],
         price: zone.type === 'Premium' ? '₹2,000 / mo' : '₹1,500 / mo'
@@ -58,15 +56,14 @@ const generateSeats = () => {
 export const seatsData = generateSeats();
 
 export const seatStats = {
-  total: 120,
-  occupied: 102,
-  available: 18,
-  reserved: 5,
+  total: 36,
+  occupied: 25,
+  available: 8,
+  reserved: 3,
   zones: [
-    { key: 'ALL', name: 'All Zones (120)' },
-    { key: 'A', name: 'Hall A - Standard (35)' },
-    { key: 'B', name: 'Hall B - Silent Focus (40)' },
-    { key: 'C', name: 'Hall C - Express (25)' },
-    { key: 'P', name: 'Premium Cabins (20)' },
+    { key: 'ALL', name: 'All Desks (36)' },
+    { key: 'A', name: 'Main Central AC Hall (15)' },
+    { key: 'B', name: 'Silent Focus Hall (12)' },
+    { key: 'P', name: 'Premium Solo Cabins (9)' },
   ]
 };
